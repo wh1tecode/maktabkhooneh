@@ -129,41 +129,13 @@
 				</div>
 				{% endfor %}
 
-				<nav class="blog-pagination justify-content-center d-flex">
-					<ul class="pagination">
-						<li class="page-item">
-							<a href="#" class="page-link" aria-label="Previous">
-								<span aria-hidden="true">
-									<span class="lnr lnr-chevron-left"></span>
-								</span>
-							</a>
-						</li>
-						<li class="page-item"><a href="#" class="page-link">01</a></li>
-						<li class="page-item active"><a href="#" class="page-link">02</a></li>
-						<li class="page-item"><a href="#" class="page-link">03</a></li>
-						<li class="page-item"><a href="#" class="page-link">04</a></li>
-						<li class="page-item"><a href="#" class="page-link">09</a></li>
-						<li class="page-item">
-							<a href="#" class="page-link" aria-label="Next">
-								<span aria-hidden="true">
-									<span class="lnr lnr-chevron-right"></span>
-								</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
+				{% include 'blog-home-pagination.html' %}
 			</div>
 			
 			<div class="col-lg-4 sidebar-widgets">
 				<div class="widget-wrap">
 					
-					<div class="single-sidebar-widget search-widget">
-						<form class="search-form" action="#">
-							<input placeholder="Search Posts" name="search" type="text" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Search Posts'">
-							<button type="submit"><i class="fa fa-search"></i></button>
-						</form>
-					</div>
+					{% include 'blog-search.html'   %}
 					
 					{% include 'blog-writer.html' %}
 					
@@ -173,9 +145,8 @@
 
 					{% popular_posts 3 %}
 			
-					
-					
 					{% include 'blog-news-letter.html'   %}
+					
 					{% include 'blog-tags.html'   %}
 				</div>
 			</div>

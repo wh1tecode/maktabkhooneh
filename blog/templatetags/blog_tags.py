@@ -34,4 +34,9 @@ def post_categories():
     print(cat_dict)
     return {"categories": cat_dict}
 
+@register.inclusion_tag("blog-post-categories.html")
+def latest_posts(arg=6):
+    posts = Post.objects.filter(status=True).latest("id")[arg]
+    return {"posts": posts}
+
 # register.inclusion_tag(get_template("blog-popular-post.html"))(popular_posts)
