@@ -29,11 +29,11 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="#">
+                        <a href="{% url 'blog:single' pid=post.id %}">
                             <h4 class="title">{{post.title}}</h4>
                         </a>
                         <p>
-                            {{post.content|truncatewords:"3"}}
+                            {{post.content|truncatewords:"1"}}
                         </p>
                         <h6 class="date">{{post.published_date|date:"M d Y"}}</h6>
                     </div>
