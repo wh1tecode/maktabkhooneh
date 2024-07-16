@@ -5,10 +5,18 @@ from .utils import increase_post_visits, next_prev_post
 
 # Create your views here.
 
-def blog_view(request):
+
+def blog_view(request, **kwargs):
     posts = Post.objects.filter(status=True, published_date__lt=timezone.now())
+    cat_name = kwargs.get("cat_name")
+    author_username = kwargs.get("author_username")
+    if cat_name:
+        posts = posts.filter(category__name=cat_name)
+    if author_username:
+        posts = posts.filter(author__username=author_username)
     context = {"posts": posts}
     return render(request, "blog-home.html", context)
+
 
 def blog_single(request, pid):
     posts = Post.objects.filter(status=True, published_date__lt=timezone.now())

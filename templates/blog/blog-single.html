@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load blog_tags %}
 {% block content %}
 <!-- start banner Area -->
 <section class="relative about-banner">
@@ -265,7 +265,29 @@
 					</form>
 				</div>
 			</div>
-			{% include 'blog-post-categories.html'   %}
+			<div class="col-lg-4 sidebar-widgets">
+				<div class="widget-wrap">
+					
+					<div class="single-sidebar-widget search-widget">
+						<form class="search-form" action="#">
+							<input placeholder="Search Posts" name="search" type="text" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Search Posts'">
+							<button type="submit"><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+					
+					{% include 'blog-writer.html' %}
+					
+					{% include 'blog-ads.html' %}
+					
+					{% include 'blog-post-categories.html' %}
+
+					{% popular_posts 3 %}
+			
+					{% include 'blog-news-letter.html'   %}
+					{% include 'blog-tags.html'   %}
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
