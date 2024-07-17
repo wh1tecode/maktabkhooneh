@@ -21,12 +21,13 @@
                     <div class="details">
                         <div class="tags">
                             <ul>
+                                {% for category in post.category.all %}
                                 <li>
-                                    <a href="#">Travel</a>
+                                    <a href="{% url 'blog:category' cat_name=category %}">{{category}}</a>
                                 </li>
-                                <li>
-                                    <a href="#">Life Style</a>
-                                </li>
+
+                                {% endfor %}
+                                
                             </ul>
                         </div>
                         <a href="{% url 'blog:single' pid=post.id %}">
