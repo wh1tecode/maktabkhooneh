@@ -180,4 +180,3 @@ EMAIL_HOST_USER = "email"
 EMAIL_HOST_PASSWORD = "email app password key"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-CSRF_TRUSTED_ORIGINS = ["https://mail.google.com/", "http://127.0.0.1:8000/"]
