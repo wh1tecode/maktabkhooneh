@@ -1,0 +1,8 @@
+django-multi-captcha-admin
+robots
+django-debug-toolbar
+django-taggit
+django-summernote
+captcha
+django-simple-captcha
+django-robots
