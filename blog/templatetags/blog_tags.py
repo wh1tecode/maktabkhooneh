@@ -1,6 +1,6 @@
 from django import template
 from django.template.loader import get_template
-from blog.models import Post, Category
+from blog.models import Post, Category, Comment
 from django.db.models import Count
 
 register = template.Library()
@@ -18,6 +18,10 @@ def total_posts_count():
 @register.filter(name="sniped")
 def sniped_content(value, arg=20):
     return value[0:arg] + "..."
+
+@register.filter(name="postcommentscount")
+def post_comments_count(post: Post):
+    return Comment.objects.filter(approve=True, post=post).count()
 
 @register.inclusion_tag("blog-popular-post.html")
 def popular_posts(arg=3):

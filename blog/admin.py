@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Post, Category
+from .models import Post, Category, Comment
+from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
@@ -10,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SummernoteModelAdmin):
     date_hierarchy = "published_date"
     empty_value_display = "-empty-"
     list_display = (
@@ -22,3 +23,8 @@ class PostAdmin(admin.ModelAdmin):
     )
     list_filter = ("status",)
     search_fields = ["title", "content"]
+    summernote_fields = ('content',)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    pass

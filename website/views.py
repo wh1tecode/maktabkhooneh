@@ -26,4 +26,6 @@ def contact_view(request: HttpRequest):
         else:
             messages.add_message(request=request, level=messages.ERROR, message="Sending message failed")
             return HttpResponseRedirect("/")
-    return render(request, "contact.html")
+    else:
+        form = ContactForm()
+    return render(request, "contact.html", context={"form": form})

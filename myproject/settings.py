@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ["127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    "multi_captcha_admin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,9 +40,29 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "django.contrib.sites",
+    "django.contrib.sitemaps",
+    "robots",
+    "debug_toolbar",
+    "taggit",
+    "django_summernote",
+    "captcha",
     "website",
     "blog",
+    "accounts",
 ]
+
+# site
+SITE_ID = 2
+
+# robots
+ROBOTS_USE_HOST = False
+ROBOTS_USE_SITEMAP = False
+
+# multi captcha
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -51,6 +72,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "myproject.urls"
@@ -58,7 +80,12 @@ ROOT_URLCONF = "myproject.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [join(BASE_DIR, "templates"), join(BASE_DIR, "templates", "website"), join(BASE_DIR, "templates", "blog")],
+        "DIRS": [
+            join(BASE_DIR, "templates"),
+            join(BASE_DIR, "templates", "website"),
+            join(BASE_DIR, "templates", "blog"),
+            join(BASE_DIR, "templates", "account"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -66,6 +93,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # "django.template.loaders.app_directories.Loader",
             ],
         },
     },
@@ -135,3 +163,21 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+LOGIN_URL = "accounts:login"
+
+# smtp 
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_FROM = "kickfundingapp@gmail.com"
+EMAIL_HOST_USER = "..."
+EMAIL_HOST_PASSWORD = "..."
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+CSRF_TRUSTED_ORIGINS = ["https://mail.google.com/", "http://127.0.0.1:8000/"]

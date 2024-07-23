@@ -1,10 +1,10 @@
 from django import forms
-from website.models import Contact
+from blog.models import Comment
 from captcha.fields import CaptchaField
 
-class ContactForm(forms.ModelForm):
-    captcha = CaptchaField()
+class CommentForm(forms.ModelForm):
+    # captcha = CaptchaField()
     
     class Meta:
-        model = Contact
+        model = Comment
         exclude = ["created_date", "updated_date"]
