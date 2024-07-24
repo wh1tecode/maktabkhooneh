@@ -7,6 +7,7 @@ from django.contrib import messages
 from accounts.forms import CustomAuthenticationForm
 from django.contrib.sites.models import Site
 from django.middleware.csrf import get_token
+from accounts.forms import CustomUserCreationForm
 # Create your views here.
 
 
@@ -38,12 +39,10 @@ def logout_view(request: HttpRequest):
 
 def signup_view(request: HttpRequest):
     if request.POST:
-        form = UserCreationForm(request.POST)
-        print("form.is_valid()")
-        print(form.errors)
-        print(form.is_valid())
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             return redirect("website:index")
     return render(request=request, template_name="signup.html")
 
