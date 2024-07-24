@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from typing import Any
@@ -33,3 +33,10 @@ class CustomAuthenticationForm(AuthenticationForm):
             self.confirm_login_allowed(self.user_cache)
 
         return self.cleaned_data
+    
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(widget=forms.TextInput(attrs={"autofocus": True}))
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+    

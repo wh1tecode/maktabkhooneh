@@ -39,6 +39,9 @@ def logout_view(request: HttpRequest):
 def signup_view(request: HttpRequest):
     if request.POST:
         form = UserCreationForm(request.POST)
+        print("form.is_valid()")
+        print(form.errors)
+        print(form.is_valid())
         if form.is_valid():
             form.save()
             return redirect("website:index")
