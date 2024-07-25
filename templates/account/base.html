@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    {% include 'messages.html' %}
 </head>
 
 <body>
@@ -23,6 +24,11 @@
     
 {% endblock %}
 
+<script>
+    setTimeout(function() {
+        $('.alert_button').trigger('click');
+    }, 4000);
+</script>
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/popper.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>

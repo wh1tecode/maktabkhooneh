@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest 
+from django.http import HttpRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
@@ -8,6 +8,7 @@ from accounts.forms import CustomAuthenticationForm
 from django.contrib.sites.models import Site
 from django.middleware.csrf import get_token
 from accounts.forms import CustomUserCreationForm
+from accounts.utils import save_errors
 # Create your views here.
 
 
@@ -22,6 +23,8 @@ def login_view(request: HttpRequest):
             )
             login(request, form.user_cache)
             return redirect("website:index")
+        save_errors(request, form)
+        
     form = CustomAuthenticationForm()
 
     return render(
@@ -41,15 +44,19 @@ def signup_view(request: HttpRequest):
     if request.POST:
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            form.save()
+            messages.add_message(
+                request=request, level=messages.SUCCESS, message="your signup successfully done"
+            )
             return redirect("website:index")
+        save_errors(request, form)
+
     return render(request=request, template_name="signup.html")
 
 
 def forget_password_view(request: HttpRequest):
     current_site = Site.objects.get_current()
-    
+
     if request.POST:
         form = PasswordResetForm(data=request.POST)
         if form.is_valid():
@@ -59,13 +66,14 @@ def forget_password_view(request: HttpRequest):
                 email_template_name="reset_password.html",
                 from_email="test@localhost",
                 html_email_template_name="reset_password.html",
-                extra_email_context={"csrf_token": csrf_token}
+                extra_email_context={"csrf_token": csrf_token},
             )
             messages.add_message(
                 request=request,
                 level=messages.SUCCESS,
                 message="check your email for reset password",
             )
+        save_errors(request, form)
 
     form = PasswordResetForm()
     return render(
@@ -73,4 +81,3 @@ def forget_password_view(request: HttpRequest):
         template_name="forget_password.html",
         context={"form": form, "site_name": current_site.name},
     )
-
