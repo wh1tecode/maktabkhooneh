@@ -15,7 +15,7 @@ SECRET_KEY = "django-insecure-xj$o!zg@)vs2k1#c80y%%(e=1b^%i2d5rw3vv$m$jmcl#@67&f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["https://online-khosro.com/"]
 
 
 MEDIA_URL = "/media/"
@@ -34,7 +34,7 @@ ROBOTS_USE_SITEMAP = False
 
 
 INTERNAL_IPS = [
-    "127.0.0.1",
+    "49.12.48.54",
 ]
 
 
