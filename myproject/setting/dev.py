@@ -38,6 +38,6 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 # EMAIL_FROM = "kickfundingapp@gmail.com"
 EMAIL_HOST_USER = "jojojumung@gmail.com"
-EMAIL_HOST_PASSWORD = "qiuk ghdd fbge infe"
+EMAIL_HOST_PASSWORD = "wbjr jyhe ujzv jubg"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
