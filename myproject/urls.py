@@ -23,7 +23,7 @@ from django.contrib.sitemaps.views import sitemap
 from website.sitemaps import StaticViewSitemap
 from blog.sitemaps import BlogSitemap
 from debug_toolbar.toolbar import debug_toolbar_urls
-
+from myproject import views
 
 sitemaps = {
     "static": StaticViewSitemap,
@@ -44,6 +44,7 @@ urlpatterns = [
     re_path(r'^robots\.txt', include('robots.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('captcha/', include('captcha.urls')),
+    path('maintenance/', views.maintenance, name='maintenance'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

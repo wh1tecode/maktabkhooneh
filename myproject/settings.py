@@ -10,16 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-
 from pathlib import Path
 from os.path import join
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-
-
 
 
 # Application definition
@@ -40,6 +35,7 @@ INSTALLED_APPS = [
     "taggit",
     "django_summernote",
     "captcha",
+    "maintenancemode",
     "website",
     "blog",
     "accounts",
@@ -48,7 +44,7 @@ INSTALLED_APPS = [
 
 # multi captcha
 MULTI_CAPTCHA_ADMIN = {
-    'engine': 'simple-captcha',
+    "engine": "simple-captcha",
 }
 
 MIDDLEWARE = [
@@ -57,9 +53,12 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "maintenancemode.middleware.MaintenanceModeMiddleware",
+    'myproject.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = "myproject.urls"
@@ -147,6 +146,6 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-
-
 LOGIN_URL = "accounts:login"
+
+MY_MAINTENANCE_MODE = True
